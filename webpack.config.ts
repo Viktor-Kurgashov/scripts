@@ -1,11 +1,13 @@
-const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+import path from 'path';
+import webpack from 'webpack';
+import 'webpack-dev-server';
+import HtmlWebPackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-module.exports = {
+const config: webpack.Configuration = {
   mode: 'development',
   entry: [
-    path.resolve(__dirname, 'src/index.js'),
+    path.resolve(__dirname, 'src/index.ts'),
   ],
   output: {
     filename: '[name].[contenthash].js',
@@ -25,13 +27,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
+        test: /\.tsx?$/i,
+        loader: 'ts-loader',
       },
       {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        test: /\.jsx?$/i,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
       },
       {
         test: /\.s[ac]ss$/i,
@@ -54,4 +56,9 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(),
   ],
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
 };
+
+export default config;
