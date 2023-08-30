@@ -43,6 +43,7 @@ const config: webpack.Configuration = {
             loader: 'css-loader',
             options: {
               modules: {
+                auto: true,
                 localIdentName: '[folder]__[local]__[hash]',
                 localIdentHashDigestLength: 5,
               },

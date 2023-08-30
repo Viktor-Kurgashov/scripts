@@ -1,10 +1,8 @@
 import { FC } from "react";
-import "./app.scss";
 
-const App: FC = ({  }) => {
+const App: FC = () => {
   return (
-    <div className="app">
-
+    <div>
     </div>
   );
 };

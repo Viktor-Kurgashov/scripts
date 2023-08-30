@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 import App from "./app";
-import './styles/tags.scss';
+import "./styles/index.scss";
 
 createRoot(
   document.getElementById('app')

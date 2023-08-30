@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+  <symbol id="arrow" viewBox="0 0 40 40" fill="none">
+    <path d="M28.5 37L11.5 20L28.5 3" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="close" viewBox="0 0 16 16" fill="none">
+    <path d="M1.45329 15.3397L15.3383 1.45465M1.45312 1.45459L15.3381 15.3396" stroke-linecap="round"/>
+  </symbol>
+
+  <svg id="checkmark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 15.0417L12.973 21L24 10"/>
+  </svg>
+
+  <svg id="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.875 14.1772L6.16893 9L5 10.2622L11.875 16.5L18.75 10.2622L17.5811 9L11.875 14.1772Z"/>
+  </svg>
+</svg>
