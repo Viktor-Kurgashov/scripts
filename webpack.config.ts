@@ -44,7 +44,7 @@ const config: webpack.Configuration = {
             options: {
               modules: {
                 auto: true,
-                localIdentName: '[folder]__[local]__[hash]',
+                localIdentName: '[local]__[hash]',
                 localIdentHashDigestLength: 5,
               },
             },
@@ -71,6 +71,9 @@ const config: webpack.Configuration = {
   ],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      '@': path.resolve(__dirname, 'src/'),
+    },
   },
 };
 

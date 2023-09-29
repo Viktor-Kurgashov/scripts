@@ -1,0 +1,41 @@
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+
+  &:hover > .input:not(:checked):not(:disabled) + .icon {
+    border-color: red;
+  }
+}
+
+.input {
+  display: none;
+
+  &:checked + .icon {
+    background: red;
+    border-color: red;
+    stroke: white;
+  }
+
+  &:disabled + .icon {
+    background: whitesmoke;
+
+    & + .label {
+      color: lightgray;
+    }
+  }
+}
+
+.icon {
+  transition: 0.3s stroke, 0.3s border-color, 0.3s background-color;
+  background: transparent;
+  border: 1px solid grey;
+  stroke: transparent;
+  stroke-width: 3px;
+  width: 18px;
+  height: 18px;
+}
+
+.label {
+  color: black;
+  margin-left: 12px;
+}

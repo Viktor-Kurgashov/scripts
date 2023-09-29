@@ -5,7 +5,12 @@
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@*": [
+        "./src/*"
+      ]
+    },
   },
   "include": [
     "./src"
