@@ -1,0 +1,23 @@
+.label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  composes: t2 from global;
+  background: red;
+  color: white;
+  border-radius: 2px;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1;
+  padding: 0 5px;
+}
+
+.text {
+  composes: t2 from global;
+  align-self: flex-start;
+  margin-bottom: 2px;
+}

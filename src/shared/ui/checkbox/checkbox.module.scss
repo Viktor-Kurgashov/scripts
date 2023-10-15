@@ -36,6 +36,7 @@
 }
 
 .label {
+  composes: t2 from global;
   color: black;
   margin-left: 12px;
 }

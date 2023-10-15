@@ -1,0 +1,11 @@
+.form {
+  box-shadow: 0 0 10px 0 lightgrey;
+  border-radius: 4px;
+  padding: 16px 20px;
+}
+
+.title {
+  composes: t1 from global;
+  text-align: center;
+  margin-bottom: 10px;
+}
