@@ -1,16 +1,11 @@
 import { FC, useState } from "react";
-import { Input, Checkbox } from "@/shared/ui";
+import { Input, Checkbox, PasswordConfirm } from "@/shared/ui";
 import { onInput, onBlur, onToggle, prepare, validateAll, collect } from "../../lib";
-import { type Field } from "../../types";
+import { type Field, type Preset } from "../../types";
 import { ReactLabel } from "../label";
 import css from "./form-simple.module.scss";
 
-export type FormSimpleProps = {
-  fields: Array<Field>,
-  button?: string,
-};
-
-export const FormSimple: FC<FormSimpleProps> = ({
+export const FormSimple: FC<Preset> = ({
   fields, button,
 }) => {
   const [items, setItems] = useState<Field[]>(prepare(fields));
@@ -68,7 +63,16 @@ export const FormSimple: FC<FormSimpleProps> = ({
               checked={field.checked}
               onChange={on.toggle}
             />
-          ) : null
+            ) : (field.type === 'password-confirm') ? (
+              <PasswordConfirm
+                key={field.name}
+                label={field.label}
+                name={field.name}
+                placeholder={field.placeholder}
+                onChange={on.change}
+                error={field.error}
+              />
+            ) : null
         )}
       </div>
 

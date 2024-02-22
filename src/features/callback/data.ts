@@ -1,4 +1,4 @@
-import { Preset } from "./types";
+import { Preset } from './types';
 
 const base: Preset = {
   fields: [
@@ -15,6 +15,13 @@ const base: Preset = {
       label: 'Телефон',
       placeholder: 'Phone',
       validator: 'phone',
+    },
+    {
+      type: 'password-confirm',
+      name: 'password',
+      label: ['Пароль', 'Введите пароль'],
+      placeholder: ['Пароль', 'Введите пароль'],
+      validator: 'password',
     },
     {
       type: 'checkbox',

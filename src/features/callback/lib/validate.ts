@@ -1,37 +1,39 @@
-import * as Yup from 'yup';
-
 const regexp = {
   email: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu,
-  phone: /^\w{11}$/
+  phone: /^\w{11}$/,
+  password: /^[a-z0-9]{6,}$/i,
 };
-
-const required = Yup.string().trim().required('Обязательное поле');
 
 const schemas = {
-  required: required,
-  email: required.matches(regexp.email, { message: 'Проверьте E-mail' }),
-  phone: required.matches(regexp.phone, { message: 'Проверьте номер' }),
+  email(value: string) {
+    if (!regexp.email.test(value)) {
+      return 'Проверьте E-mail';
+    }
+  },
+  phone(value: string) {
+    if (!regexp.phone.test(value)) {
+      return 'Проверьте пароль';
+    }
+  },
+  password(value: string) {
+    if (!regexp.password.test(value)) {
+      return 'Проверьте пароль';
+    }
+  },
+  required(value: string) {
+    if (!value.length) {
+      return 'Обязательное поле';
+    }
+  },
 };
 
-type validateProps = (
-  scheme: TInputValidator,
-  value: string,
-) => string | null;
-
-/**
- * Yup-схемы валидации для инпутов
- */
 export type TInputValidator = keyof typeof schemas;
 
-/**
- * проверяет значение через yup-схему, при ошибке вернёт сообщение
- */
-export const validate: validateProps = (scheme, value) => {
-  try {
-    schemas[scheme].validateSync(value);
+export const validate = (
+  scheme: TInputValidator,
+  value: string
+): string | null => {
+  if (scheme in schemas) {
+    return schemas[scheme](value);
   }
-  catch(err) {
-    return err.message;
-  }
-  return null;
 };

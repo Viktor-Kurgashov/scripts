@@ -1,5 +1,5 @@
-import { type Field } from "../types";
-import { validate } from "./validate";
+import { type Field } from '../types';
+import { validate } from './validate';
 
 /**
  * Обработчик `onChange` текстового инпута
@@ -43,7 +43,8 @@ export const onBlur = (
   const error = validate(current.validator, value);
 
   if (
-    error !== current.error || !current.value.length
+    error !== current.error ||
+    !current.value.length
   ) {
     return fields.map(field =>
       (field.name !== name)
@@ -62,6 +63,7 @@ export const prepare = (fields: Field[]): Field[] => {
       case 'text':
       case 'phone':
       case 'email':
+      case 'password-confirm':
         return {
           ...field,
           value: field.value ?? '',
@@ -86,7 +88,7 @@ export const validateAll = (fields: Field[]): Field[] | void => {
       value: field.value.trim(),
     }));
 
-  return (result.find(field => field.error !== null)) ? result : null;
+  return (result.find(field => field.error)) ? result : null;
 };
 
 /**
@@ -98,6 +100,7 @@ export const collect = (fields: Field[]): Object => {
       case 'text':
       case 'phone':
       case 'email':
+      case 'password-confirm':
         return {
           ...result,
           [field.name]: field.value,

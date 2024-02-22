@@ -3,9 +3,8 @@ import clsx from 'clsx';
 import css from './input.module.scss';
 
 export type InputData = {
-  type: 'text' | 'phone' | 'email',
   name: string,
-  value: string,
+  value?: string,
   placeholder?: string,
 };
 
@@ -29,7 +28,7 @@ export const Input: FC<InputProps> = ({
     <input
       className={parentClassName}
       name={name}
-      value={value ?? ''}
+      value={value}
       placeholder={placeholder}
       onChange={(event) => {
         onChange(event.target.value, name);

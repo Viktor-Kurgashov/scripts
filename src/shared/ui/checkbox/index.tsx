@@ -1,14 +1,13 @@
-import { FC } from "react";
-import { Svg } from "../svg";
+import { type FC } from 'react';
+import { Svg } from '../svg';
 import clsx from 'clsx';
-import css from "./checkbox.module.scss";
+import css from './checkbox.module.scss';
 
 export type CheckboxData = {
-  type?: 'checkbox',
   label: string,
   name: string,
   value: string,
-  checked: boolean,
+  checked?: boolean,
   disabled?: boolean,
 };
 
@@ -30,7 +29,7 @@ export const Checkbox: FC<CheckboxProps> = ({
         type="checkbox"
         name={name}
         value={value}
-        checked={checked}
+        checked={Boolean(checked)}
         disabled={disabled}
         onChange={toggle}
         className={css.input}
