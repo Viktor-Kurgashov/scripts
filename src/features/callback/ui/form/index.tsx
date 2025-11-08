@@ -1,19 +1,19 @@
-import { FC, useState } from "react";
+import { useState, useMemo } from "react";
 import { Input, Checkbox, PasswordConfirm } from "@/shared/ui";
 import { onInput, onBlur, onToggle, prepare, validateAll, collect } from "../../lib";
 import { type Field, type Preset } from "../../types";
 import { ReactLabel } from "../label";
 import css from "./form-simple.module.scss";
 
-export const FormSimple: FC<Preset> = ({
+export const FormSimple: React.FC<Preset> = ({
   fields, button,
 }) => {
   const [items, setItems] = useState<Field[]>(prepare(fields));
 
-  const on = {
+  const on = useMemo(() => ({
     change: (value: string, name: string) => {
       setItems(prev =>
-        onInput(value, name, prev),
+        onInput(value, name, [...prev])
       );
     },
 
@@ -34,11 +34,11 @@ export const FormSimple: FC<Preset> = ({
     },
 
     toggle: (checked: boolean, name: string): void => {
-      setItems(
-        onToggle(checked, name, items)
+      setItems(prev =>
+        onToggle(checked, name, [...prev])
       );
     },
-  };
+  }), []);
 
   return (
     <form onSubmit={on.submit}>

@@ -1,18 +1,18 @@
-import { FC, ReactElement } from "react";
+import { memo } from "react";
 import clsx from 'clsx';
 import css from './label.module.scss';
 
-type LabelProps = {
+type LabelProps = React.PropsWithChildren & {
   className?: string,
-  children: ReactElement,
   label: string,
   error: string,
 };
 
-export const ReactLabel: FC<LabelProps> = ({
+export const ReactLabel: React.FC<LabelProps> = memo(({
   children, label, error, className,
 }) => {
   const parentClassName = clsx(css.label, className);
+  console.log('label');
 
   return (
     <label className={parentClassName}>
@@ -23,4 +23,4 @@ export const ReactLabel: FC<LabelProps> = ({
       {error && <span className={css.error}>{error}</span>}
     </label>
   );
-};
+});

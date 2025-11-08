@@ -21,7 +21,28 @@ a {
   color: inherit;
 }
 
-img,
+picture {
+  object-fit: cover;
+
+  &, img {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+
+  img {
+    object-fit: inherit;
+    object-position: inherit;
+  }
+}
+
+img {
+  display: block;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
 svg,
 video,
 iframe {

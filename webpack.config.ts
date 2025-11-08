@@ -49,7 +49,12 @@ const config: webpack.Configuration = {
               },
             },
           },
-          'sass-loader'
+          {
+            loader: 'sass-loader',
+            options: {
+              api: 'modern',
+            },
+          },
         ],
       },
       {

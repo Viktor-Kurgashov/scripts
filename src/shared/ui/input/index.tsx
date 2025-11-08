@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { memo } from 'react';
 import clsx from 'clsx';
 import css from './input.module.scss';
 
@@ -15,7 +15,7 @@ type InputProps = InputData & {
   onBlur: (value: string, name: string) => void,
 };
 
-export const Input: FC<InputProps> = ({
+export const Input: React.FC<InputProps> = memo(({
   name, value, error, placeholder, onChange, onBlur, className,
 }) => {
   const parentClassName = clsx(
@@ -23,6 +23,7 @@ export const Input: FC<InputProps> = ({
     error && css.error,
     className,
   );
+  console.warn('-input:');
 
   return (
     <input
@@ -38,4 +39,4 @@ export const Input: FC<InputProps> = ({
       }}
     />
   );
-};
+});

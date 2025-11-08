@@ -1,4 +1,3 @@
-import { FC } from "react";
 import Sprite from "./sprite.svg";
 
 type SvgProps = {
@@ -6,7 +5,7 @@ type SvgProps = {
   className?: string,
 };
 
-export const Svg: FC<SvgProps> = ({ id, className }) => {
+export const Svg: React.FC<SvgProps> = ({ id, className }) => {
   return (
     <svg className={className}>
       <use xlinkHref={`${Sprite}#${id}`} />

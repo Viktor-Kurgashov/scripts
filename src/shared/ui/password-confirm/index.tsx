@@ -1,4 +1,4 @@
-import { useState, useEffect, type FC, memo } from 'react';
+import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import { ReactLabel } from '@/features/callback/ui/label';
 import { Input } from '../input';
 import clsx from 'clsx';
@@ -17,7 +17,7 @@ export type PasswordConfirmProps = PasswordConfirmData & {
 };
 
 /** Поле пароль / подтверждение пароля */
-export const PasswordConfirm: FC<PasswordConfirmProps> = memo(function PasswordConfirm ({
+export const PasswordConfirm: React.FC<PasswordConfirmProps> = memo(function PasswordConfirm ({
   label, name, onChange, error, placeholder, className,
 }) {
   const [data, setData] = useState({
@@ -25,8 +25,9 @@ export const PasswordConfirm: FC<PasswordConfirmProps> = memo(function PasswordC
     repeat: '',
     error: '',
   });
+  console.log('-password');
 
-  const on = {
+  const on = useMemo(() => ({
     change(value: string, name: string): void {
       const compared = data[name === 'value' ? 'repeat' : 'value'];
 
@@ -39,14 +40,14 @@ export const PasswordConfirm: FC<PasswordConfirmProps> = memo(function PasswordC
       });
     },
     blur(): void {
-      if (!data.value && !data.repeat) {
-        setData({
+      setData((prev) => {
+        return {
           ...data,
-          error: 'Пароли должны совпадать',
-        });
-      }
+          error: !prev.value && !prev.repeat ? 'Пароли должны совпадать' : '',
+        };
+      });
     },
-  };
+  }), []);
 
   useEffect(() => {
     // Вызовет onChangе когда в оба инпута введены одинаковые значения
@@ -58,32 +59,48 @@ export const PasswordConfirm: FC<PasswordConfirmProps> = memo(function PasswordC
     }
   }, [data]);
 
+  const changeRepeat = useCallback((value: string) => {
+    on.change(value, 'repeat');
+  }, [on]);
+
+  const changeValue = useCallback((value: string) => {
+    on.change(value, 'value');
+  }, [on]);
+
+  const repeatField = useMemo(() => {
+    return (
+      <Input
+        name='repeat'
+        value={data.repeat}
+        onChange={changeRepeat}
+        onBlur={on.blur}
+        placeholder={placeholder[1]}
+        error={Boolean(data.error ? data.error : error)}
+      />
+    );
+  }, [data.repeat]);
+
+  const field = useMemo(() => {
+    return (
+      <Input
+        name='value'
+        value={data.value}
+        onChange={changeValue}
+        onBlur={on.blur}
+        placeholder={placeholder[0]}
+        error={Boolean(data.error ? data.error : error)}
+      />
+    );
+  }, [data.value]);
+
   return (
     <div className={clsx(css.parent, className)}>
-      <ReactLabel label={label[0]} error={data.error ? data.error : error}>
-        <Input
-          name='value'
-          value={data.value}
-          onChange={(value) => {
-            on.change(value, 'value');
-          }}
-          onBlur={on.blur}
-          placeholder={placeholder[0]}
-          error={Boolean(data.error ? data.error : error)}
-        />
+      <ReactLabel label={label[0]} error={data.error ?? error}>
+        {field}
       </ReactLabel>
 
-      <ReactLabel label={label[1]} error={data.error ? data.error : error}>
-        <Input
-          name='repeat'
-          value={data.repeat}
-          onChange={(value) => {
-            on.change(value, 'repeat');
-          }}
-          onBlur={on.blur}
-          placeholder={placeholder[1]}
-          error={Boolean(data.error ? data.error : error)}
-        />
+      <ReactLabel label={label[1]} error={data.error ?? error}>
+        {repeatField}
       </ReactLabel>
     </div>
   );

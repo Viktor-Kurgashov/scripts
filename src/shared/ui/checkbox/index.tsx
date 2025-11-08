@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { memo } from 'react';
 import { Svg } from '../svg';
 import clsx from 'clsx';
 import css from './checkbox.module.scss';
@@ -16,12 +16,13 @@ type CheckboxProps = CheckboxData & {
   className?: string,
 };
 
-export const Checkbox: FC<CheckboxProps> = ({
+export const Checkbox: React.FC<CheckboxProps> = memo(({
   label, name, value, onChange, checked, disabled, className,
 }) => {
   const toggle = (event: React.ChangeEvent<HTMLInputElement>): void => {
     onChange(event.target.checked, name);
   };
+  console.log('--chbox');
 
   return (
     <label className={clsx(css.checkbox, className)}>
@@ -43,4 +44,4 @@ export const Checkbox: FC<CheckboxProps> = ({
       <span className={css.label}>{label}</span>
     </label>
   );
-};
+});

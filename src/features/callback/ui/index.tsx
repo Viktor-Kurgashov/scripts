@@ -1,16 +1,15 @@
-import { FC } from "react";
 import { FormSimple } from "./form";
 import { presets } from "../data";
 import clsx from 'clsx';
 import css from "./callback.module.scss";
 
 type Props = {
-  preset: keyof typeof presets,
+  preset?: keyof typeof presets,
   className?: string,
 };
 
-export const Callback: FC<Props> = ({
-  preset, className,
+export const Callback: React.FC<Props> = ({
+  preset = 'base', className,
 }) => {
   const { title, fields, button } = presets[preset];
 

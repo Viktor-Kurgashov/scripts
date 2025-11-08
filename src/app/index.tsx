@@ -1,9 +1,11 @@
-import { FC } from "react";
+import { Callback } from '@/features/callback';
+// import { ScrollLoadExample } from '@/shared/lib/use-scroll-load/example';
+import './index.scss';
 
-const App: FC = () => {
+const App: React.FC = () => {
   return (
-    <div>
-    </div>
+    <Callback />
+    // <ScrollLoadExample />
   );
 };
 

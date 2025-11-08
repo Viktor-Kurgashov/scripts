@@ -1,0 +1,30 @@
+#a {
+  height: 10vh;
+  margin: 5vh auto;
+  background: darkseagreen;
+}
+
+#b {
+  background: ghostwhite;
+  // height: 600px;
+  padding-block: 100px 100px;
+  overflow-y: auto;
+  border-bottom: 4px dashed;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  margin-bottom: 100vh;
+}
+
+li {
+  flex-basis: 100px;
+  flex-shrink: 0;
+  background: linen;
+
+  &:nth-child(even) {
+    background: mistyrose;
+  }
+}
